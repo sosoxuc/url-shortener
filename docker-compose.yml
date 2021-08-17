@@ -1,0 +1,29 @@
+version: '3.4'
+
+networks:
+  url-shortener-network:
+    driver: bridge
+services:
+  api:
+    container_name: url-shortener-api
+    image: url-shortener-api:0.1
+    environment:
+      - MONGODB_CONNECTION_STRING=mongodb://mongo:27017/
+    ports:
+      - 5000:5000
+    build:
+      context: .
+      dockerfile: api.dockerfile
+    networks:
+      - url-shortener-network
+    volumes:
+      - .:/app
+  mongo:
+    container_name: url-shortener-mongo
+    image: mongo
+    ports:
+      - 127.0.0.1:27017:27017
+    networks:
+      - url-shortener-network
+    volumes:
+      - /home/url-shortener-data/db:/data/db
