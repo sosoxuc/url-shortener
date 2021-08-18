@@ -11,7 +11,7 @@ Locally:
 
 ```
 pip install -r reqs.txt
-docker-compose up
+python -m api.app
 ```
 
 ## Run tests
